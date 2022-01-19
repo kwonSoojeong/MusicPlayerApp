@@ -1,0 +1,29 @@
+{
+    "musics": [
+        {
+            "track": "LEVITATE",
+            "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/075/levitate-1642161636-mAFiwFJq6T.mp3",
+            "artist": "Neoni",
+            "coverUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/075/100x100/levitate-1642161631-MkJvqkOqjc.jpg"
+        },
+        {
+            "track": "Binary",
+            "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/074/binary-1642078837-XJ67S6tL0W.mp3",
+            "artist": "HANNY, Donkong",
+            "coverUrl":"https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/074/325x325/binary-1642078833-HKfRd1SeHg.jpg"
+        },
+        {
+            "track": "Let Me Go",
+            "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/073/let-me-go-1641902437-UxXbdyBdUo.mp3",
+            "artist": "Jimmy Rivler, Max Vermeulen, Almost Weekend",
+            "coverUrl":"https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/073/100x100/let-me-go-1641902432-saulgdlRnj.jpg"
+        },
+        {
+            
+            "track": "Got Me",
+            "streamUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/072/got-me-1641556838-kjLzelwxc0.mp3",
+            "artist": "Nito-Onna, Poylow",
+            "coverUrl": "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/072/100x100/got-me-1641556834-pzqZFaFeeN.jpg"
+        }
+    ]
+}
