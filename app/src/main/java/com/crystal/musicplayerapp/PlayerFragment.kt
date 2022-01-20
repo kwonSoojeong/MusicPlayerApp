@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.crystal.musicplayerapp.databinding.FragmentPlayerBinding
 import com.crystal.musicplayerapp.service.MusicDto
 import com.crystal.musicplayerapp.service.MusicService
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,17 +21,53 @@ import retrofit2.converter.gson.GsonConverterFactory
 class PlayerFragment : Fragment(R.layout.fragment_player) {
     private var binding: FragmentPlayerBinding? = null
     private lateinit var playListAdapter: PlayListAdapter
+    private lateinit var player: ExoPlayer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentPlayerBinding = FragmentPlayerBinding.bind(view)
         binding = fragmentPlayerBinding
 
+        initPlayerView(fragmentPlayerBinding)
         initPlayListButton(fragmentPlayerBinding)
+        initPlayControlButton(fragmentPlayerBinding)
         initPlayListRecyclerView()
         getVideoListFromServer()
     }
 
+    private fun initPlayerView(fragmentPlayerBinding: FragmentPlayerBinding) {
+        context?.let {
+            player = ExoPlayer.Builder(it).build()
+        }
+        fragmentPlayerBinding.playerView.player = player
+        player.addListener(object : Player.EventListener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+                if (isPlaying) {
+                    fragmentPlayerBinding.playControlImageView.setImageResource(R.drawable.pause_48)
+                } else {
+                    fragmentPlayerBinding.playControlImageView.setImageResource(R.drawable.play_arrow_48)
+                }
+            }
+        })
+    }
+
+    private fun initPlayControlButton(fragmentPlayerBinding: FragmentPlayerBinding) {
+        fragmentPlayerBinding.playControlImageView.setOnClickListener {
+            val player = this.player ?: return@setOnClickListener
+            if (player.isPlaying) {
+                player.pause()
+            } else {
+                player.play()
+            }
+        }
+        fragmentPlayerBinding.skipNextImageView.setOnClickListener {
+
+        }
+        fragmentPlayerBinding.skipPrevImageView.setOnClickListener {
+
+        }
+    }
 
     var isWatchingPlayListView: Boolean = true
     private fun initPlayListButton(fragmentPlayerBinding: FragmentPlayerBinding) {
@@ -69,17 +108,27 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                         val modelList = musicDto.musics.mapIndexed { index, musicEntity ->
                             musicEntity.mapper(index.toLong())
                         }
+                        setMusicList(modelList)
                         playListAdapter.submitList(modelList)
                     }
 
                 }
-
                 override fun onFailure(call: Call<MusicDto>, t: Throwable) {
                     Log.e("PlayerFragment", t.message.toString())
                 }
-
             })
         }
+    }
+
+    private fun setMusicList(modelList: List<MusicModel>) {
+        player.addMediaItems(modelList.map { model ->
+            MediaItem.Builder()
+                .setMediaId(model.id.toString())
+                .setUri(model.streamUrl)
+                .build()
+        })
+        player.prepare()
+        player.play()
     }
 
     override fun onDestroy() {
