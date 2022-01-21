@@ -9,18 +9,16 @@
         android:id="@+id/playerViewGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:constraint_referenced_ids="coverCardView, trackTextView,nameTextView,
          bottomBackgroundView, playerSeekBar, totalTimeTextView, playTimeTextView"
-        android:visibility="gone"
-        tools:visibility="visible"
-        />
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/playListGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="playListRecyclerView, playlistSeekBar, playListTitleView"
-        />
+        app:constraint_referenced_ids="playListRecyclerView, playlistSeekBar, playListTitleView" />
 
     <View
         android:id="@+id/topBackgroundView"
@@ -62,13 +60,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:text="재생목록"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="재생목록" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -138,8 +136,7 @@
         android:thumb="@drawable/player_seek_thumb"
         app:layout_constraintBottom_toTopOf="@id/playerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:progress="40" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/playTimeTextView"
@@ -174,8 +171,7 @@
         android:thumbTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/playerView"
-        tools:progress="40" />
+        app:layout_constraintTop_toTopOf="@id/playerView" />
 
     <ImageView
         android:id="@+id/playControlImageView"
